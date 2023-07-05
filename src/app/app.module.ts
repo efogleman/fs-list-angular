@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -14,6 +17,8 @@ import { ListingDetailPageComponent } from './listing-detail-page/listing-detail
 import { MyListingsPageComponent } from './my-listings-page/my-listings-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NewListingPageComponent } from './new-listing-page/new-listing-page.component';
+
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,8 @@ import { NewListingPageComponent } from './new-listing-page/new-listing-page.com
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
