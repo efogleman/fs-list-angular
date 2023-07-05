@@ -8,14 +8,14 @@ import { Listing } from '../types';
   styleUrls: ['./listing-data-form.component.css']
 })
 export class ListingDataFormComponent implements OnInit {
-  @Input() buttonText;
-  @Input() currentName = '';
-  @Input() currentDescription = '';
-  @Input() currentPrice = '';
+  @Input() buttonText: string = '';
+  @Input() currentName: string = '';
+  @Input() currentDescription: string = '';
+  @Input() currentPrice: number = 0;
 
   name: string = '';
   description: string = '';
-  price: string = '';
+  price: number = 0;
   
   @Output() onSubmit = new EventEmitter<Listing>();
 
@@ -31,7 +31,7 @@ export class ListingDataFormComponent implements OnInit {
 
   onButtonClicked(): void {
     this.onSubmit.emit({
-      id: null,
+      id: '',
       name: this.name,
       description: this.description,
       price: Number(this.price),

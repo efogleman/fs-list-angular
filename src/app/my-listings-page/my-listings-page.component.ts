@@ -10,6 +10,7 @@ import { Listing } from '../types';
 export class MyListingsPageComponent {
 
   listings: Listing[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private listingsService: ListingsService,
@@ -17,7 +18,10 @@ export class MyListingsPageComponent {
 
   ngOnInit(): void {
     this.listingsService.getListingsForUser()
-      .subscribe(listings => this.listings = listings);
+      .subscribe(listings => {
+        this.listings = listings;
+        this.isLoading = false;
+      });
   }
 
   onDeleteClicked(listingId: string): void {
@@ -26,6 +30,7 @@ export class MyListingsPageComponent {
         this.listings = this.listings.filter(
           listing => listing.id != listingId
         );
+        alert(`Listing has been deleted!`);
       });
   }
 }

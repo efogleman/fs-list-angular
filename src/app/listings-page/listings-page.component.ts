@@ -10,6 +10,7 @@ import { ListingsService } from '../listings.service';
 export class ListingsPageComponent {
 
   listings: Listing[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private listingsService: ListingsService,
@@ -17,7 +18,10 @@ export class ListingsPageComponent {
 
   ngOnInit(): void {
     this.listingsService.getListings()
-      .subscribe(listings => this.listings = listings);
+      .subscribe(listings => {
+        this.listings = listings;
+        this.isLoading = false;
+      });
   }
 
 }

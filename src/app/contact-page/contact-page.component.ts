@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class ContactPageComponent implements OnInit {
   email: string = '';
   message: string = '';
-  listing: Listing;
+  listing: Listing | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class ContactPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.listingsService.getListingById(id)
       .subscribe(listing => {
         this.listing = listing;

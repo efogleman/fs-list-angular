@@ -18,11 +18,13 @@ export class NewListingPageComponent implements OnInit {
 
   }
 
-  onSubmit({ name, description, price }): void {
-    this.listingsSerice.createNewListing(name, description, price)
-      .subscribe(() => {
-        this.router.navigateByUrl('/my-listings');
-      });
+  onSubmit({ name, description, price } : { name:string, description:string, price:number }): void {
+    if (name && description && price) {
+      this.listingsSerice.createNewListing(name, description, price)
+        .subscribe(() => {
+          this.router.navigateByUrl('/my-listings');
+        });
+    }
   }
 
 }

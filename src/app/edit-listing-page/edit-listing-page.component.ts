@@ -9,7 +9,7 @@ import { ListingsService } from '../listings.service';
   styleUrls: ['./edit-listing-page.component.css']
 })
 export class EditListingPageComponent implements OnInit {
-  listing: Listing;
+  listing: Listing | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,16 +18,18 @@ export class EditListingPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.listingsService.getListingById(id)
       .subscribe(listing => this.listing = listing);
   }
 
-  onSubmit({ name, description, price }) {
-    this.listingsService.editListing(this.listing.id, name, description, price)
+  onSubmit({ name, description, price } : { name:string, description:string, price:number }) {
+    if (this.listing && this.listing.id) {
+      this.listingsService.editListing(this.listing.id, name, description, price)
       .subscribe( () => {
         this.router.navigateByUrl('/my-listings');
-      });
+      });      
+    }
   }
 
 }
